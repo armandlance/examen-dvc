@@ -52,3 +52,75 @@ stages:
       hash: md5
       md5: be404ef96c19bd97f98a6889f27095d1
       size: 228951
+  gridsearch:
+    cmd: python src\models\gridsearch.py
+    deps:
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: be404ef96c19bd97f98a6889f27095d1
+      size: 228951
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: a9f6c4c8eba38f4177a8cfac86d19e97
+      size: 27405
+    - path: src\models\gridsearch.py
+      hash: md5
+      md5: a57553136e2b9acee0e22177e20812ca
+      size: 816
+    outs:
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 467ce2ab3da57a6792411e385af5a06d
+      size: 3925617
+  train_model:
+    cmd: python src\models\train_model.py
+    deps:
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: be404ef96c19bd97f98a6889f27095d1
+      size: 228951
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: a9f6c4c8eba38f4177a8cfac86d19e97
+      size: 27405
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 467ce2ab3da57a6792411e385af5a06d
+      size: 3925617
+    - path: src\models\train_model.py
+      hash: md5
+      md5: d710063de41a9648e46fef58ffbc522e
+      size: 623
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 9b42bc19fe48137c6d95ab83f3ebed60
+      size: 3925633
+  evaluate_model:
+    cmd: python src\models\evaluate_model.py
+    deps:
+    - path: data/processed/X_test_scaled.csv
+      hash: md5
+      md5: eb33f401380d429e1f212e5f38cdcc5f
+      size: 57391
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 3738f93f228b4914c0c48ba6a9c35298
+      size: 6821
+    - path: models/model.pkl
+      hash: md5
+      md5: 9b42bc19fe48137c6d95ab83f3ebed60
+      size: 3925633
+    - path: src\models\evaluate_model.py
+      hash: md5
+      md5: 6c92b16ef4365b9c0448a9d4ffe6522d
+      size: 788
+    outs:
+    - path: data/predictions.csv
+      hash: md5
+      md5: 6933069a82d48481a3fb81a9662081e5
+      size: 7152
+    - path: metrics/scores.json
+      hash: md5
+      md5: 85aa1be3bf854a7a2984f086d51b1cbf
+      size: 54

@@ -18,7 +18,8 @@ def main():
     grid_search.fit(X_train, y_train)
 
     os.makedirs('models', exist_ok=True)
-    joblib.dump(grid_search.best_params_, 'models/best_params.pkl')
+    # Sauvegarde du modèle complet (pas juste les paramètres)
+    joblib.dump(grid_search.best_estimator_, 'models/best_model.pkl')
 
 if __name__ == '__main__':
     main()

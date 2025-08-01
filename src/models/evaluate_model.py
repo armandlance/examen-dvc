@@ -7,7 +7,7 @@ import os
 def main():
     X_test = pd.read_csv('data/processed/X_test_scaled.csv')
     y_test = pd.read_csv('data/processed/y_test.csv').values.ravel()
-    model = joblib.load('models/trained_model.pkl')
+    model = joblib.load('models/model.pkl')  # <-- changer ici
 
     predictions = model.predict(X_test)
 
@@ -21,7 +21,7 @@ def main():
     with open('metrics/scores.json', 'w') as f:
         json.dump(metrics, f)
 
-    pd.DataFrame({'prediction': predictions}).to_csv('predictions/predictions.csv', index=False)
+    pd.DataFrame({'prediction': predictions}).to_csv('data/predictions.csv', index=False)
 
 if __name__ == '__main__':
     main()
